@@ -8,18 +8,15 @@
     android:padding="@dimen/activity_horizontal_margin"
     tools:context=".EditorActivity">
 
-    <!-- Overview category -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Label -->
         <TextView
             android:text="@string/details"
             style="@style/CategoryStyle" />
 
-        <!-- Input fields -->
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="0dp"
@@ -27,14 +24,12 @@
             android:paddingLeft="4dp"
             android:orientation="vertical">
 
-            <!-- Name field -->
             <EditText
                 android:id="@+id/edit_name"
                 android:hint="@string/name"
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
 
-            <!-- Breed field -->
             <EditText
                 android:id="@+id/edit_description"
                 android:hint="@string/description"
@@ -43,19 +38,16 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Gender category -->
     <LinearLayout
         android:id="@+id/container_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Label -->
         <TextView
             android:text="@string/available_quantity"
             style="@style/CategoryStyle" />
 
-        <!-- Input field -->
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="0dp"
@@ -70,33 +62,52 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Measurement category -->
     <LinearLayout
         android:id="@+id/container_quantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Label -->
         <TextView
             android:text="@string/ordered_quantity"
             style="@style/CategoryStyle" />
 
-        <!-- Input fields -->
         <RelativeLayout
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:paddingLeft="4dp">
 
-            <!-- Weight field -->
             <EditText
                 android:id="@+id/edit_quantity"
                 android:hint="@string/quantity"
                 android:inputType="number"
                 style="@style/EditorFieldStyle" />
 
-            <!-- Units for weight (kg) -->
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="@string/price"
+            style="@style/CategoryStyle" />
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingLeft="4dp">
+
+            <EditText
+                android:id="@+id/price_edit_view"
+                android:hint="@string/in_rupee"
+                android:inputType="number"
+                style="@style/EditorFieldStyle" />
+
         </RelativeLayout>
     </LinearLayout>
 
@@ -106,26 +117,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Label -->
         <TextView
             android:text="@string/supplier"
             style="@style/CategoryStyle" />
 
-        <!-- Input fields -->
         <RelativeLayout
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:paddingLeft="4dp">
 
-            <!-- Weight field -->
             <EditText
                 android:id="@+id/supplier_name_edit_view"
                 android:hint="@string/name"
-                android:inputType="number"
+                android:inputType="text"
                 style="@style/EditorFieldStyle" />
 
-            <!-- Units for weight (kg) -->
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

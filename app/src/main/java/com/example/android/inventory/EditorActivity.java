@@ -7,23 +7,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import static com.example.android.inventory.R.id.edit_name;
+
 public class EditorActivity extends AppCompatActivity {
 
-    private EditText mNameEditText = (EditText)findViewById(R.id.edit_name);
-    private EditText mDescriptionEditText = (EditText)findViewById(R.id.edit_description);
-    private EditText mAvailableQuantityEditText = (EditText)findViewById(R.id.edit_quantity);
-    private EditText mOrderedQuantityEditText = (EditText)findViewById(R.id.edit_available_quantity);
+    private EditText mNameEditText;
+    private EditText mDescriptionEditText;
+    private EditText mAvailableQuantityEditText;
+    private EditText mOrderedQuantityEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
+
+        mNameEditText = (EditText)findViewById(edit_name);
+        mDescriptionEditText = (EditText)findViewById(R.id.edit_description);
+        mAvailableQuantityEditText = (EditText)findViewById(R.id.edit_quantity);
+        mOrderedQuantityEditText = (EditText)findViewById(R.id.edit_available_quantity);
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu options from the res/menu/menu_editor.xml file.
-        // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.menu_editor, menu);
         return true;
     }
