@@ -18,5 +18,8 @@
     <string name="price">Price</string>
     <string name="in_rupee">In Rupees</string>
 
+    <string name="insertion_failed">Insertion of item failed</string>
+    <string name="insertion_succesful">Insertion of item successful!!!</string>
+
 
 </resources>
