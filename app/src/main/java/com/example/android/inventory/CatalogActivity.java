@@ -17,8 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.content.ContentUris;
-import android.widget.AdapterView;
 
 import com.example.android.inventory.DataBase.InventoryContract;
 
@@ -74,8 +72,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         getMenuInflater().inflate(R.menu.menu_catalog, menu);
         return true;
     }
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -83,6 +79,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 insertDummyData();
                 return true;
             case R.id.action_delete_all_entries:
+                deleteAllPets();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -97,9 +94,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE, 100);
         values.put(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME, "XYZ");
 
-        Uri newUri = getContentResolver().insert(InventoryContract.InventoryEntry.CONTENT_URI, values);
+        getContentResolver().insert(InventoryContract.InventoryEntry.CONTENT_URI, values);
     }
-
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {

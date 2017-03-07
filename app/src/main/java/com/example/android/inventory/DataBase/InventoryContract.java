@@ -19,14 +19,14 @@ public final class InventoryContract {
     public static final String PATH_INVENTORY = "inventory";
 
     public static final class InventoryEntry implements BaseColumns{
-        public final static String TABLE_NAME = "items";
+        public final static String TABLE_NAME = "inventory";
         public  final static String _ID = BaseColumns._ID;
         public final static String COLUMN_ITEM_NAME = "name";
         public final static String COLUMN_ITEM_DESCRIPTION = "description";
-        public final static String COLUMN_ITEM_AVAILABLE_QUANTITY = "available quantity";
-        public final static String COLUMN_ITEM_ORDERED_QUANTITY = "ordered quantity";
+        public final static String COLUMN_ITEM_AVAILABLE_QUANTITY = "quantity";
+        public final static String COLUMN_ITEM_ORDERED_QUANTITY = "orderquantity";
         public final static String COLUMN_ITEM_PRICE = "price";
-        public final static String COLUMN_SUPPLIER_NAME = "name";
+        public final static String COLUMN_SUPPLIER_NAME = "suppliername";
 
         public static final String CONTENT_LIST_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_INVENTORY;

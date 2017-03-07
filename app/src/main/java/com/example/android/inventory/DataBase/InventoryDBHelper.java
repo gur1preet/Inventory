@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class InventoryDBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "items.db";
+    private static final String DATABASE_NAME = "inventory.db";
     private static final int DATABASE_VERSION = 1;
 
     public InventoryDBHelper(Context context){
@@ -29,7 +29,6 @@ public class InventoryDBHelper extends SQLiteOpenHelper {
 
         db.execSQL(SQL_CREATE_HABITS_TABLE);
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 

@@ -7,11 +7,10 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
-import static com.example.android.inventory.DataBase.InventoryContract.InventoryEntry.TABLE_NAME;
+import static com.example.android.inventory.DataBase.InventoryContract.CONTENT_AUTHORITY;
+import static com.example.android.inventory.DataBase.InventoryContract.PATH_INVENTORY;
 
 /**
  * Created by DELL on 06-03-2017.
@@ -28,8 +27,8 @@ public class InventoryProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.InventoryEntry.TABLE_NAME,ITEMS);
-        sUriMatcher.addURI(InventoryContract.CONTENT_AUTHORITY, InventoryContract.InventoryEntry.TABLE_NAME + "/#",ITEM_ID);
+        sUriMatcher.addURI(CONTENT_AUTHORITY, PATH_INVENTORY,ITEMS);
+        sUriMatcher.addURI(CONTENT_AUTHORITY, PATH_INVENTORY + "/#",ITEM_ID);
     }
 
     @Override
@@ -54,7 +53,12 @@ public class InventoryProvider extends ContentProvider {
             case ITEM_ID:
                 selection = InventoryContract.InventoryEntry._ID + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
-                cursor = database.query(InventoryContract.InventoryEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                cursor = database.query(InventoryContract.InventoryEntry.TABLE_NAME,
+                        projection
+                        ,selection
+                        ,selectionArgs
+                        ,null,null
+                        ,sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException("Cannot query unknown URI "+ uri);
@@ -158,6 +162,13 @@ public class InventoryProvider extends ContentProvider {
                 throw new IllegalArgumentException("Enter valid amount for price");
             }
             return 0;
+        }
+
+        if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME)) {
+            String supplierName = values.getAsString(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME);
+            if (supplierName == null) {
+                throw new IllegalArgumentException("Enter a valid supplier name.");
+            }
         }
 
         if (values.size() == 0) {

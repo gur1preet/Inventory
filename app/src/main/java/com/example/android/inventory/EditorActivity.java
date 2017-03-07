@@ -17,10 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.android.inventory.DataBase.InventoryContract;
@@ -161,7 +158,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             intPrice = Integer.parseInt(price);
         }
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE, intPrice);
-
         values.put(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME, supplierName);
 
         if (mCurrentItemUri == null) {
