@@ -1,12 +1,16 @@
 package com.example.android.inventory;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.example.android.inventory.DataBase.InventoryContract;
 
 public class CatalogActivity extends AppCompatActivity {
 
@@ -38,7 +42,7 @@ public class CatalogActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_insert_dummy_data:
-                // Do nothing for now
+                insertDummyData();
                 return true;
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
@@ -46,5 +50,17 @@ public class CatalogActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void insertDummyData() {
+        ContentValues values = new ContentValues();
+        values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_NAME, "Sample");
+        values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_DESCRIPTION, "Add Description Here");
+        values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY, 10);
+        values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY, 10);
+        values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE, 100);
+        values.put(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME, "XYZ");
+
+        Uri newUri = getContentResolver().insert(InventoryContract.InventoryEntry.CONTENT_URI, values);
     }
 }
