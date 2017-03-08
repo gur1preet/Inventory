@@ -63,8 +63,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private ImageView mimageView;
     private ImageView mimageBtn;
 
-    private Bitmap imageBitMap;
-
     private boolean mItemHasChanged = false;
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -122,9 +120,14 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mSupplierName = (EditText)findViewById(R.id.supplier_name_edit_text);
         mimageView= (ImageView)findViewById(R.id.image_view);
         //mImageButton = (ImageButton)findViewById(R.id.add_image_button);
-        imageBitMap = BitmapFactory.decodeResource(
-                getResources(), R.drawable.add_image);
 
+        mNameEditText.setOnTouchListener(mTouchListener);
+        mDescriptionEditText.setOnTouchListener(mTouchListener);
+        mAvailableQuantityEditText.setOnTouchListener(mTouchListener);
+        mOrderedQuantityEditText.setOnTouchListener(mTouchListener);
+        mPrice.setOnTouchListener(mTouchListener);
+        mSupplierName.setOnTouchListener(mTouchListener);
+        mimageView.setOnTouchListener(mTouchListener);
     }
     public void tryToOpenImageSelector() {
         if (ContextCompat.checkSelfPermission(this,
@@ -330,9 +333,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int availableQuantity = cursor.getInt(availableQuantityColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
             String supplierName = cursor.getString(supplierNameColumnIndex);
-            byte[] pictureByte = cursor.getBlob(imageColumnIndex);
-
-            Bitmap pictureBitmap = BitmapFactory.decodeByteArray(pictureByte, 0, pictureByte.length);
+            actualUri = Uri.parse(cursor.getString(imageColumnIndex));
 
             mNameEditText.setText(name);
             mDescriptionEditText.setText(description);
@@ -340,7 +341,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             mAvailableQuantityEditText.setText(Integer.toString(availableQuantity));
             mPrice.setText(Integer.toString(price));
             mSupplierName.setText(supplierName);
-            //mImage.setImageBitmap(pictureBitmap);
+            mimageView.setImageURI(Uri.parse(cursor.getString(imageColumnIndex)));
+
+
         }
     }
 

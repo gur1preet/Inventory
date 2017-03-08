@@ -93,7 +93,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY, 10);
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE, 100);
         values.put(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME, "XYZ");
-        values.put(InventoryContract.InventoryEntry.COLUMN_IMAGE,R.drawable.add);
+        values.put(InventoryContract.InventoryEntry.COLUMN_IMAGE,R.drawable.done);
 
         getContentResolver().insert(InventoryContract.InventoryEntry.CONTENT_URI, values);
     }

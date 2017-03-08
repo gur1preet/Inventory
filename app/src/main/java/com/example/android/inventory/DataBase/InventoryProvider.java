@@ -124,6 +124,7 @@ public class InventoryProvider extends ContentProvider {
             case ITEMS:
                 return updatePet(uri, contentValues, selection, selectionArgs);
             case ITEM_ID:
+                selection = InventoryContract.InventoryEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
                 return updatePet(uri, contentValues, selection, selectionArgs);
             default:
