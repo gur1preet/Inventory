@@ -134,44 +134,6 @@ public class InventoryProvider extends ContentProvider {
 
     private int updatePet(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
-        if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_ITEM_NAME)) {
-            String name = values.getAsString(InventoryContract.InventoryEntry.COLUMN_ITEM_NAME);
-            if (name == null) {
-                throw new IllegalArgumentException("Item needs a name");
-            }
-        }
-
-        if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY)) {
-            Integer avaialableQuantity = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY);
-            if (avaialableQuantity != null && avaialableQuantity < 0) {
-                throw new IllegalArgumentException("Enter valid quantity to order");
-            }
-            return 0;
-        }
-
-        if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_ITEM_ORDERED_QUANTITY)) {
-            Integer orderedQuantity = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_ITEM_ORDERED_QUANTITY);
-            if (orderedQuantity != null && orderedQuantity < 0) {
-                throw new IllegalArgumentException("Enter valid quantity to order");
-            }
-            return 0;
-        }
-
-        if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE)) {
-            Integer price = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE);
-            if (price != null && price < 0) {
-                throw new IllegalArgumentException("Enter valid amount for price");
-            }
-            return 0;
-        }
-
-        if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME)) {
-            String supplierName = values.getAsString(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME);
-            if (supplierName == null) {
-                throw new IllegalArgumentException("Enter a valid supplier name.");
-            }
-        }
-
         if (values.size() == 0) {
             return 0;
         }
