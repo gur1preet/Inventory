@@ -25,7 +25,8 @@ public class InventoryDBHelper extends SQLiteOpenHelper {
                 + InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
                 + InventoryContract.InventoryEntry.COLUMN_ITEM_ORDERED_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
                 + InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE + " INTEGER NOT NULL DEFAULT 0, "
-                + InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL);";
+                + InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL, "
+                + InventoryContract.InventoryEntry.COLUMN_IMAGE + " TEXT NOT NULL);";
 
         db.execSQL(SQL_CREATE_HABITS_TABLE);
     }

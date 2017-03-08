@@ -93,6 +93,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY, 10);
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE, 100);
         values.put(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME, "XYZ");
+        values.put(InventoryContract.InventoryEntry.COLUMN_IMAGE,R.drawable.add);
 
         getContentResolver().insert(InventoryContract.InventoryEntry.CONTENT_URI, values);
     }
@@ -101,7 +102,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         String[] projection = {
                 InventoryContract.InventoryEntry._ID,
                 InventoryContract.InventoryEntry.COLUMN_ITEM_NAME,
-                InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE};
+                InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE,
+                InventoryContract.InventoryEntry.COLUMN_IMAGE};
 
         return new CursorLoader(this,
                 InventoryContract.InventoryEntry.CONTENT_URI,
