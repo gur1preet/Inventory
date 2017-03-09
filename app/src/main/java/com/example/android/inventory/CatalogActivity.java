@@ -42,15 +42,15 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
-        ListView petListView = (ListView) findViewById(R.id.lists);
+        ListView itemListView = (ListView) findViewById(R.id.lists);
 
         View emptyView = findViewById(R.id.empty_title_text);
-        petListView.setEmptyView(emptyView);
+        itemListView.setEmptyView(emptyView);
 
         mCursorAdapter = new InventoryAdapter(this, null);
-        petListView.setAdapter(mCursorAdapter);
+        itemListView.setAdapter(mCursorAdapter);
 
-        petListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
@@ -89,7 +89,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         ContentValues values = new ContentValues();
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_NAME, "Sample");
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_DESCRIPTION, "Add Description Here");
-        values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY, 10);
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY, 10);
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE, 100);
         values.put(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME, "XYZ");

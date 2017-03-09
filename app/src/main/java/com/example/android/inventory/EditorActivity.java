@@ -36,7 +36,6 @@ import com.example.android.inventory.DataBase.InventoryContract;
 
 import java.io.ByteArrayOutputStream;
 
-import static android.R.attr.bitmap;
 import static com.example.android.inventory.R.id.activity_chooser_view_content;
 import static com.example.android.inventory.R.id.edit_name;
 
@@ -119,7 +118,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mPrice = (EditText)findViewById(R.id.price_edit_view);
         mSupplierName = (EditText)findViewById(R.id.supplier_name_edit_text);
         mimageView= (ImageView)findViewById(R.id.image_view);
-        //mImageButton = (ImageButton)findViewById(R.id.add_image_button);
 
         mNameEditText.setOnTouchListener(mTouchListener);
         mDescriptionEditText.setOnTouchListener(mTouchListener);
@@ -129,6 +127,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mSupplierName.setOnTouchListener(mTouchListener);
         mimageView.setOnTouchListener(mTouchListener);
     }
+
+
     public void tryToOpenImageSelector() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -162,7 +162,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         switch (item.getItemId()) {
             case R.id.action_save:
                 saveItem();
-                finish();
                 return true;
             case R.id.action_delete:
                 showDeleteConfirmationDialog();
@@ -188,13 +187,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         return super.onOptionsItemSelected(item);
     }
 
-    public void addImage(View view) {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, getString(R.string.select_photo)), FILE_SELECT_CODE);
-    }
-
     private void saveItem() {
         String nameString = mNameEditText.getText().toString().trim();
         String descriptionString = mDescriptionEditText.getText().toString().trim();
@@ -204,10 +196,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String supplierName = mSupplierName.getText().toString().trim();
 
         if (mCurrentItemUri == null &&
-                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(descriptionString) &&
-                TextUtils.isEmpty(availableQuantity) && TextUtils.isEmpty(orderedQuantity) &&
-                TextUtils.isEmpty(price) && TextUtils.isEmpty(supplierName)) {
+                TextUtils.isEmpty(nameString) || TextUtils.isEmpty(descriptionString) ||
+                TextUtils.isEmpty(availableQuantity) || TextUtils.isEmpty(orderedQuantity) ||
+                TextUtils.isEmpty(price) || TextUtils.isEmpty(supplierName)) {
+            Toast.makeText(this, "Please fill all the entries.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        if(actualUri == null){
+            Toast.makeText(this, "Please add image", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -255,6 +252,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         Toast.LENGTH_SHORT).show();
             }
         }
+        finish();
     }
 
     @Override
