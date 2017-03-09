@@ -122,17 +122,17 @@ public class InventoryProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case ITEMS:
-                return updatePet(uri, contentValues, selection, selectionArgs);
+                return updateItem(uri, contentValues, selection, selectionArgs);
             case ITEM_ID:
                 selection = InventoryContract.InventoryEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
-                return updatePet(uri, contentValues, selection, selectionArgs);
+                return updateItem(uri, contentValues, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);
         }
     }
 
-    private int updatePet(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    private int updateItem(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
         if (values.size() == 0) {
             return 0;

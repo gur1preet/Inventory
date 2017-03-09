@@ -56,9 +56,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
                 Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
 
-                Uri currentPetUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, id);
+                Uri currentItemUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, id);
 
-                intent.setData(currentPetUri);
+                intent.setData(currentItemUri);
 
                 startActivity(intent);
             }
@@ -102,6 +102,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 InventoryContract.InventoryEntry._ID,
                 InventoryContract.InventoryEntry.COLUMN_ITEM_NAME,
                 InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE,
+                InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY,
                 InventoryContract.InventoryEntry.COLUMN_IMAGE};
 
         return new CursorLoader(this,

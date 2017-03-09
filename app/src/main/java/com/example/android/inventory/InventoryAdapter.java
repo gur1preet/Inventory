@@ -42,29 +42,29 @@ public class InventoryAdapter extends CursorAdapter {
         TextView quantityTextView = (TextView)view.findViewById(R.id.quantity_text_view);
         ImageView imgView=(ImageView)view.findViewById(R.id.list_image);
 
+        int idColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
         int nameColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_NAME);
+        int availableQuantityColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY);
         int priceColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE);
         int imgColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_IMAGE);
-        int quantityColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY);
-        int idColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
-        final long id = cursor.getLong(idColumnIndex);
 
-        final int quantity = cursor.getInt(quantityColumnIndex);
+        final long id = cursor.getLong(idColumnIndex);
         String itemName = cursor.getString(nameColumnIndex);
         String itemPrice = cursor.getString(priceColumnIndex);
+        final int availableQuantity = cursor.getInt(availableQuantityColumnIndex);
         imgView.setImageURI(Uri.parse(cursor.getString(imgColumnIndex)));
 
-        Button sellButton = (Button) view.findViewById(R.id.sale_button);
+        ImageView sellButton = (ImageView) view.findViewById(R.id.sale_button);
         sellButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                if (quantity > 0) {
+                if (availableQuantity > 0) {
 
                     ContentValues values = new ContentValues();
 
-                    int newQuantity = quantity - 1;
+                    int newQuantity = availableQuantity - 1;
 
                     Log.v("new quantity", "after click" + newQuantity);
 
@@ -72,15 +72,16 @@ public class InventoryAdapter extends CursorAdapter {
 
                     Uri uri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, id);
                     view.getContext().getContentResolver().update(uri, values, null, null);
-
-                    view.getContext().getContentResolver().notifyChange(InventoryContract.InventoryEntry.CONTENT_URI, null);
-
                 }
             }
         });
 
-        nameTextView.setText(itemName);
-        priceTextView.setText(itemPrice);
+        String name = "Name: " + itemName;
+        String price = "Price: " + itemPrice;
+        String quantity = "Quantity: " + availableQuantity;
+
+        nameTextView.setText(name);
+        priceTextView.setText(price);
         quantityTextView.setText(quantity);
     }
 }

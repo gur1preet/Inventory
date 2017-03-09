@@ -166,6 +166,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             case R.id.action_delete:
                 showDeleteConfirmationDialog();
                 return true;
+            case R.id.action_order_more:
+                orderMore();
+                return true;
             case android.R.id.home:
                 if (!mItemHasChanged) {
                     NavUtils.navigateUpFromSameTask(EditorActivity.this);
@@ -405,6 +408,19 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 mimageView.setImageURI(actualUri);
                 mimageView.invalidate();
             }
+        }
+    }
+
+    public void orderMore(){
+        String name = mNameEditText.getText().toString().trim();
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Ordering more of " + name);
+        intent.putExtra(Intent.EXTRA_TEXT, "Hello");
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+
+            startActivity(intent);
         }
     }
 }
