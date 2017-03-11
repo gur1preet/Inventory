@@ -11,9 +11,6 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,17 +23,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.android.inventory.DataBase.InventoryContract;
 
-import java.io.ByteArrayOutputStream;
-
-import static com.example.android.inventory.R.id.activity_chooser_view_content;
 import static com.example.android.inventory.R.id.edit_name;
 
 public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -57,7 +49,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private EditText mAvailableQuantityEditText;
     private EditText mOrderedQuantityEditText;
     private EditText mSupplierName;
-    private String image;
     private EditText mPrice;
     private ImageView mimageView;
     private ImageView mimageBtn;
@@ -113,8 +104,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         mNameEditText = (EditText)findViewById(edit_name);
         mDescriptionEditText = (EditText)findViewById(R.id.edit_description);
-        mAvailableQuantityEditText = (EditText)findViewById(R.id.edit_quantity);
-        mOrderedQuantityEditText = (EditText)findViewById(R.id.edit_available_quantity);
+        mAvailableQuantityEditText = (EditText)findViewById(R.id.edit_available_quantity);
+        mOrderedQuantityEditText = (EditText)findViewById(R.id.edit_ordered_quantity);
         mPrice = (EditText)findViewById(R.id.price_edit_view);
         mSupplierName = (EditText)findViewById(R.id.supplier_name_edit_text);
         mimageView= (ImageView)findViewById(R.id.image_view);
@@ -260,7 +251,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public void onBackPressed() {
-        // If the pet hasn't changed, continue with handling back button press
         if (!mItemHasChanged) {
             super.onBackPressed();
             return;
@@ -322,24 +312,24 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         if (cursor.moveToFirst()) {
             int nameColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_NAME);
             int descriptionColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_DESCRIPTION);
-            int orderedQuantityColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_ORDERED_QUANTITY);
             int availableQuantityColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY);
+            int orderedQuantityColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_ORDERED_QUANTITY);
             int priceColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE);
             int supplierNameColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_SUPPLIER_NAME);
             int imageColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_IMAGE);
 
             String name = cursor.getString(nameColumnIndex);
             String description = cursor.getString(descriptionColumnIndex);
-            int orderedQuantity = cursor.getInt(orderedQuantityColumnIndex);
             int availableQuantity = cursor.getInt(availableQuantityColumnIndex);
+            int orderedQuantity = cursor.getInt(orderedQuantityColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
             String supplierName = cursor.getString(supplierNameColumnIndex);
             actualUri = Uri.parse(cursor.getString(imageColumnIndex));
 
             mNameEditText.setText(name);
             mDescriptionEditText.setText(description);
-            mOrderedQuantityEditText.setText(Integer.toString(orderedQuantity));
             mAvailableQuantityEditText.setText(Integer.toString(availableQuantity));
+            mOrderedQuantityEditText.setText(Integer.toString(orderedQuantity));
             mPrice.setText(Integer.toString(price));
             mSupplierName.setText(supplierName);
             mimageView.setImageURI(Uri.parse(cursor.getString(imageColumnIndex)));
@@ -352,8 +342,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     public void onLoaderReset(Loader<Cursor> loader) {
         mNameEditText.setText("");
         mDescriptionEditText.setText("");
-        mOrderedQuantityEditText.setText("0");
         mAvailableQuantityEditText.setSelection(0);
+        mOrderedQuantityEditText.setText("0");
         mPrice.setText("0");
         mSupplierName.setText("");
     }

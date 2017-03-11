@@ -103,6 +103,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 InventoryContract.InventoryEntry.COLUMN_ITEM_NAME,
                 InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE,
                 InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY,
+                InventoryContract.InventoryEntry.COLUMN_ITEM_ORDERED_QUANTITY,
                 InventoryContract.InventoryEntry.COLUMN_IMAGE};
 
         return new CursorLoader(this,

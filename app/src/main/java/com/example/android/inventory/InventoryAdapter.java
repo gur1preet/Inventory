@@ -5,20 +5,16 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.inventory.DataBase.InventoryContract;
-
-import static android.R.attr.id;
-import static com.example.android.inventory.R.string.quantity;
 
 /**
  * Created by DELL on 07-03-2017.
@@ -45,6 +41,7 @@ public class InventoryAdapter extends CursorAdapter {
         int idColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
         int nameColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_NAME);
         int availableQuantityColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY);
+        int orderedQuantityCloumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_ORDERED_QUANTITY);
         int priceColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE);
         int imgColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_IMAGE);
 
@@ -52,6 +49,7 @@ public class InventoryAdapter extends CursorAdapter {
         String itemName = cursor.getString(nameColumnIndex);
         String itemPrice = cursor.getString(priceColumnIndex);
         final int availableQuantity = cursor.getInt(availableQuantityColumnIndex);
+        final int orderedQuantity = cursor.getInt(orderedQuantityCloumnIndex);
         imgView.setImageURI(Uri.parse(cursor.getString(imgColumnIndex)));
 
         ImageView sellButton = (ImageView) view.findViewById(R.id.sale_button);
@@ -64,14 +62,18 @@ public class InventoryAdapter extends CursorAdapter {
 
                     ContentValues values = new ContentValues();
 
-                    int newQuantity = availableQuantity - 1;
+                    int newAvailableQuantity = availableQuantity - 1;
+                    int newOrderedQuantity = orderedQuantity + 1;
 
-                    Log.v("new quantity", "after click" + newQuantity);
+                    Log.v("new quantity", "after click" + newAvailableQuantity);
 
-                    values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY, newQuantity);
+                    values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_AVAILABLE_QUANTITY, newAvailableQuantity);
+                    values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_ORDERED_QUANTITY, newOrderedQuantity);
 
                     Uri uri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, id);
                     view.getContext().getContentResolver().update(uri, values, null, null);
+                } else {
+                    Toast.makeText(view.getContext(),"No more available Items",Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -108,7 +108,7 @@
             android:paddingLeft="4dp">
 
             <EditText
-                android:id="@+id/edit_quantity"
+                android:id="@+id/edit_ordered_quantity"
                 android:hint="@string/quantity"
                 android:inputType="number"
                 style="@style/EditorFieldStyle" />
